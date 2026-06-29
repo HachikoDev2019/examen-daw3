@@ -192,7 +192,8 @@ def api_info():
             "nombre": "API REST Películas",
             "version": "1.0",
             "framework": "Flask",
-            "seguridad": "JWT"
+            "seguridad": "JWT",
+            "metodos": "GET y POST únicamente"
         },
         "message": "API funcionando correctamente"
     })
@@ -327,10 +328,10 @@ def api_guardar_pelicula():
 
 
 # ==========================================================
-# ACTUALIZAR PELICULA
+# ACTUALIZAR PELICULA - MODIFICADO: CAMBIADO DE PUT A POST
 # ==========================================================
 
-@app.route("/api_actualizar_pelicula", methods=["PUT"])
+@app.route("/api_actualizar_pelicula", methods=["POST"])
 @jwt_required()
 def api_actualizar_pelicula():
 
@@ -377,16 +378,18 @@ def api_actualizar_pelicula():
 
 
 # ==========================================================
-# ELIMINAR PELICULA
+# ELIMINAR PELICULA - MODIFICADO: CAMBIADO DE DELETE A POST
 # ==========================================================
 
-@app.route("/api_eliminar_pelicula/<int:idPelicula>", methods=["DELETE"])
+@app.route("/api_eliminar_pelicula", methods=["POST"])
 @jwt_required()
-def api_eliminar_pelicula(idPelicula):
+def api_eliminar_pelicula():
 
     rpta = dict()
 
     try:
+        # Ahora el ID viene en el JSON del body en lugar de la URL
+        idPelicula = request.json["id"]
 
         if eliminar_peliculaAD(idPelicula):
 
