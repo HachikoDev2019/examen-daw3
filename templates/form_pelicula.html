@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Películas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #1a1a1a; /* Un tono más oscuro, tipo cine */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+        h2 {
+            text-align: center;
+            color: #e74c3c; /* Rojo cinematográfico */
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 2px solid #eee;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #e74c3c;
+        }
+        .grid-dos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Nueva Película</h2>
+    <form action="{{ url_for('guardar_pelicula') }}" method="POST">
+        
+        <div class="form-group">
+            <label for="titulo">Título Original</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Ej. Inception" required>
+        </div>
+
+        <div class="form-group">
+            <label for="director">Director/a</label>
+            <input type="text" id="director" name="director" placeholder="Nombre del director" required>
+        </div>
+
+        <div class="grid-dos">
+            <div class="form-group">
+                <label for="anio">Año de Estreno</label>
+                <input type="number" id="anio" name="anio" min="1895" max="2030" placeholder="2024">
+            </div>
+            <div class="form-group">
+                <label for="duracion">Duración (min)</label>
+                <input type="number" id="duracion" name="duracion" placeholder="120">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Género Principal</label>
+            <select id="genero" name="genero">
+                <option value="accion">Acción</option>
+                <option value="drama">Drama</option>
+                <option value="comedia">Comedia</option>
+                <option value="ciencia-ficcion">Ciencia Ficción</option>
+                <option value="documental">Documental</option>
+                <option value="animacion">Animación</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="clasificacion">Clasificación</label>
+            <select id="clasificacion" name="clasificacion">
+                <option value="tp">Todos los públicos</option>
+                <option value="7">+7 años</option>
+                <option value="12">+12 años</option>
+                <option value="16">+16 años</option>
+                <option value="18">+18 años</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="trailer">URL del Tráiler</label>
+            <input type="url" id="trailer" name="trailer" placeholder="https://youtube.com/...">
+        </div>
+
+        <div class="form-group">
+            <label for="sinopsis">Sinopsis corta</label>
+            <textarea id="sinopsis" name="sinopsis" rows="3" placeholder="De qué trata la película..."></textarea>
+        </div>
+
+        <button type="submit">Añadir a la Colección</button>
+    </form>
+</div>
+
+</body>
+</html>

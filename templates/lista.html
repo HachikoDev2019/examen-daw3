@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartelera - Colección de Películas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #eee;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        h1 { color: #e74c3c; margin: 0; }
+        .btn-add {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-edit {
+            background-color: #a8d2ea;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-del {
+            background-color: #ff0000;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .table-container {
+            background: #2c2c2c;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #ddd;
+        }
+        th {
+            background-color: #333;
+            color: #e74c3c;
+            text-align: left;
+            padding: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #444;
+            font-size: 0.95rem;
+        }
+        tr:hover {
+            background-color: #383838;
+        }
+        .empty-msg {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Mi Colección</h1>
+        <a href="{{ url_for('inicio') }}" class="btn-add">+ Nueva Película</a>
+    </header>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Director</th>
+                    <th>Año</th>
+                    <th>Duración</th>
+                    <th>Género</th>
+                    <th>Clasificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if datos %}
+                    {% for pelicula in datos %}
+                    <tr>
+                        <td>{{ pelicula['id'] }}</td>
+                        <td>{{ pelicula['titulo'] }}</td>
+                        <td>{{ pelicula['director'] }}</td>
+                        <td>{{ pelicula['anio'] }}</td>
+                        <td>{{ pelicula['duracion'] }}</td>
+                        <td>{{ pelicula['genero'] }}</td>
+                        <td>{{ pelicula['clasificacion'] }}</td>
+                        <td>
+                            <a href="{{ url_for('cargareditarpelicula', idPelicula=pelicula['id']) }}" class="btn-edit">Editar</a> 
+                            <a href="{{ url_for('eliminar_pelicula', idPelicula=pelicula['id']) }}" 
+                            class="btn-del" 
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar la película?');">
+                            Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                <tr><td colspan="7">No existen datos</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

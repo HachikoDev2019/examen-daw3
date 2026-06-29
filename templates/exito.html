@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Exitoso</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .success-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            max-width: 400px;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+        h2 { color: #1a1a1a; margin-bottom: 0.5rem; }
+        p { color: #666; margin-bottom: 2rem; }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover { background-color: #c0392b; }
+        .secondary-link {
+            display: block;
+            margin-top: 1rem;
+            color: #e74c3c;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-card">
+        <div class="icon">🎬</div>
+        <h2>¡Corte y Queda!</h2>
+        <p>La película ha sido registrada correctamente en la colección.</p>
+        <a href="{{ url_for('listar_peliculas') }}" class="btn">Ver Cartelera</a>
+        <a href="{{ url_for('inicio') }}" class="secondary-link">Registrar otra película</a>
+    </div>
+</body>
+</html>
